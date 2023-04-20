@@ -16,6 +16,12 @@ attini environment create dev
 
 #### Package
 
+The ``-cb/--container-build ``  flag will do a container build.
+
+The ``-crl/--container-repository-login `` flag will log in to ECR. 
+
+Find the container configuration in attini-setup.yaml. 
+
 ```bash
 attini deploy run . -e dev -cb -crl
 ```
