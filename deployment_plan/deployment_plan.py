@@ -1,4 +1,6 @@
 from attini_cdk import (
+    AttiniRunner,
+    RunnerConfiguration,
     AttiniDeploymentPlanStack,
     AttiniCdk,
     AttiniRunnerJob,
@@ -16,11 +18,18 @@ class DeploymentPlanStack(AttiniDeploymentPlanStack):
 
         hello_world_stack = hello_world_app.hello_world_stack
 
+        runner = AttiniRunner(self, "runner",
+                              runner_configuration=RunnerConfiguration(
+                                  job_timeout=3600
+                              ))
+
         deploy_cdk_app = AttiniCdk(self, "deploy_cdk_app",
+                                   runner=runner.runner_name,
                                    path="./"
                                    )
 
         run_script = AttiniRunnerJob(self, 'run_script',
+                                     runner=runner.runner_name,
                                      environment={
                                          "SNS_TOPIC": deploy_cdk_app.get_output(
                                              hello_world_stack.artifact_id,

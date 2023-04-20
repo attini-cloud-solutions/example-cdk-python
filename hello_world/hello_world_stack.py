@@ -26,6 +26,6 @@ class HelloWorldStack(Stack):
 
         topic.add_subscription(subs.SqsSubscription(queue))
 
-        CfnOutput(self, "SnsTopicName",
+        CfnOutput(self, self.sns_topic_name,
                   value=topic.topic_name
                   )

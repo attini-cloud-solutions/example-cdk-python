@@ -22,3 +22,4 @@ venv.bak/
 cdk.out/
 
 .idea/
+attini_dist/
